@@ -1,0 +1,65 @@
+const textArea = document.querySelector(".text-area");
+const mensaje = document.querySelector(".mensaje");
+
+// La letra "e" es convertida para "enter"
+// La letra "i" es convertida para "imes"
+// La letra "a" es convertida para "ai"
+// La letra "o" es convertida para "ober"
+// La letra "u" es convertida para "ufat"
+
+function btnEncriptar(){
+    const textoEncriptado = textArea.value;
+    if (/^[a-z]+$/.test(textoEncriptado)) {
+        const textoEncriptadoModificado = encriptar(textoEncriptado);
+        mensaje.value = textoEncriptadoModificado;
+        textArea.value = "";
+        mensaje.style.backgroundImage = "none";
+    } else {
+        alert("Ingrese solo letras minúsculas y sin acentos");
+    }
+}
+
+function encriptar(stringEncriptada){
+    let matrizCodigo = [["e", "enter"], ["i", "imes"], ["a", "ai"], ["o","ober"], ["u","ufat"]];
+    stringEncriptada = stringEncriptada.toLowerCase();
+    for(let i = 0; i < matrizCodigo.length; i++){
+        if(stringEncriptada.includes(matrizCodigo[i][0])){
+            stringEncriptada = stringEncriptada.replaceAll(matrizCodigo[i][0], matrizCodigo [i][1]);
+        }
+    }
+    return stringEncriptada;
+}
+
+function btnDesencriptar(){
+    let textoDesencriptado;
+    if (mensaje.value === "") {
+        textoDesencriptado = desencriptar(textArea.value);
+        textArea.value = "";
+    } else {
+        textoDesencriptado = desencriptar(mensaje.value);
+    }
+    mensaje.value = textoDesencriptado;
+}
+
+function desencriptar(stringDesencriptada){
+    let matrizCodigo = [["e", "enter"], ["i", "imes"], ["a", "ai"], ["o","ober"], ["u","ufat"]];
+    stringDesencriptada = stringDesencriptada.toLowerCase();
+    for(let i = 0; i < matrizCodigo.length; i++){
+        if(stringDesencriptada.includes(matrizCodigo[i][1])){
+            stringDesencriptada = stringDesencriptada.replaceAll(matrizCodigo[i][1], matrizCodigo [i][0]);
+        }
+    }
+    return stringDesencriptada;
+}
+
+function btnCopiar(){
+    mensaje.select();
+    document.execCommand("copy");
+    mensaje.value = "";
+}
+
+const btnCopiarTexto = document.querySelector(".btn-copiar");
+btnCopiarTexto.addEventListener("click", btnCopiar);
+
+const btnDesencriptarTexto = document.querySelector(".btn-desencriptar");
+btnDesencriptarTexto.addEventListener("click", btnDesencriptar);
