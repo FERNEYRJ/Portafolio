@@ -95,12 +95,14 @@
         cursor: pointer;
         height: 67px;
         width: 250px;
-        margin-top: 784px;
+        margin-top: 18px; /* Ajustado */
         margin-left: 40px;
-    }
+        position: relative; /* Agregado */
+        z-index: 2; /* Agregado */
+      }
 
     @media screen and (max-width: 480px){
-        .text-area{
+        .text-area, .mensaje{
 
             width: auto;
 
@@ -129,3 +131,20 @@
             line-height: 150%;
             }
         }      
+
+       
+        @media screen and (max-width: 480px){
+            .text-area, .mensaje{
+                width: auto;
+            }
+        
+            .btn-copiar {
+                margin-top: 18px;
+                margin-left: auto;
+                margin-right: auto;
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
