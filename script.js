@@ -52,10 +52,15 @@ function btnDesencriptar() {
 }
 
 function btnCopiar() {
-  mensaje.select();
-  document.execCommand("copy");
-  mensaje.value = "";
-}
+    mensaje.select();
+    navigator.clipboard.writeText(mensaje.value)
+      .then(() => {
+        mensaje.value = "";
+      })
+      .catch((error) => {
+        console.error('Error al copiar el texto: ', error);
+      });
+  }
 
 const btnCopiarTexto = document.querySelector(".btn-copiar");
 btnCopiarTexto.addEventListener("click", btnCopiar);
